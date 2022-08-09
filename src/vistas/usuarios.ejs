@@ -27,12 +27,17 @@
                         </tr>
                     </thead>
                     <tbody>
+                        
                         <% if (data){ %>
-                           <% for (let i = 0 ; i < 1; i++){ %>
+                           <% for (let i = 0 ; i < data.length; i++){ %>
                                 <tr>
                                     <td><%= (i + 1) %></td>
+                                    <td><%= data[i].nombre %></td>
+                                    <td><%= data[i].apellido %></td>
+                                    <td><%= data[i].edad %></td>
+                                    <td><%= data[i].telefono %></td>
                                 </tr>
-                           } %>
+                           <% } %>
                      <% } %>                    
                     </tbody>
 
