@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://bootswatch.com/4/lux/bootstrap.min.css">
+    
     <title>Document</title>
 </head>
 <body>
@@ -13,8 +14,56 @@
         
     </nav>
     <div class="container">
-        <div class="row">
-            <div class="col-7">
+        <div class="col-12 mt-5">
+            <div class="card">
+                <div class="card-body">
+                        <form action="/agregar" method="post">
+                            <div class="form-group">
+                                <input type="text" name="nombre" placeholder="nombre" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="apellido" placeholder="apellido" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="edad" placeholder="edad" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="telefono" placeholder="telefono" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="id_sucursal" placeholder="id de la Sucursal" class="form-control">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Guardar Usuario</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 mt-1">
+            <% if (typeof validaciones !== "undefined" ) { %>
+                <% validaciones.forEach((validacion) => { %>
+                    <div class="alert alert-danger" role="alert">
+                        <strong><%= validacion.msg %></strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                <% }); %>
+            <% } %>
+        </div>
+        <div class="row mt-5">
+            <div class="col-3">
+                <a href="/sucursal" class="btn btn-success btn-sm">Consultar Empleados sucursal "A"</a>                     
+            </div>
+            <div class="col-3">
+                <a href="/sucursal1" class="btn btn-success btn-sm">Consultar Empleados sucursal "B"</a>                     
+            </div>
+            <div class="col-3">
+                <a href="/sucursal2" class="btn btn-success btn-sm">Consultar Empleados sucursal "C"</a>                     
+            </div>
+            <div class="col-3">
+                <a href="/sucursal3" class="btn btn-success btn-sm">Consultar Empleados sucursal "D"</a>                     
+            </div>
+        </div>
+        
+            <div class="col-12 mt-5 pr-1 ">
                 <table class="table table-bordered table-hover">
                     <thead>
                         <tr>
@@ -23,12 +72,12 @@
                             <th>Apellido</th>
                             <th>Edad</th>
                             <th>Telefono</th>
+                            <th>id_sucursal</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        
-                        <% if (data){ %>
+                    <tbody>                       
+                        <% if (typeof data !== "undefined"){ %>
                            <% for (let i = 0 ; i < data.length; i++){ %>
                                 <tr>
                                     <td><%= (i + 1) %></td>
@@ -36,6 +85,11 @@
                                     <td><%= data[i].apellido %></td>
                                     <td><%= data[i].edad %></td>
                                     <td><%= data[i].telefono %></td>
+                                    <td><%= data[i].id_sucursal %></td>
+                                    <td>
+                                        <a href="/delete/<%= data[i].id_empleados %>" class="btn btn-danger btn-sm">Eliminar</a>
+                                        <a href="/update/<%= data[i].id_empleados %>" class="btn btn-info btn-sm">Editar</a>
+                                    </td>
                                 </tr>
                            <% } %>
                      <% } %>                    
@@ -43,24 +97,9 @@
 
                 </table>
             </div>
-            <div class="col-5 mt-5">
-                <form action="/agregar" method="post">
-                    <div class="form-group">
-                        <input type="text" name="nombre" placeholder="nombre" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" name="apellido" placeholder="apellido" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" name="edad" placeholder="edad" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" name="telefono" placeholder="telefono" class="form-control">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Guardar Usuario</button>
-                </form>
-            </div>
-        </div>
+            
+        
+        
     </div>
 </body>
 </html>

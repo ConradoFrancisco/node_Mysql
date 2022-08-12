@@ -4,6 +4,7 @@ const mysql = require("mysql")
 const myConn = require("express-myconnection")
 const app = express();
 const path = require("path")
+module.exports = app
 
 
 // configuraciones express
@@ -11,7 +12,7 @@ app.set("port", process.env.PORT || 3000)
 app.set("view engine","ejs");
 app.set("views", path.join(__dirname, "vistas"))
 
-//configuracion de middlewares
+//coneccion a base de datos
 app.use(morgan('dev')) 
 app.use(myConn(mysql,{
     host: "localhost",
@@ -20,10 +21,10 @@ app.use(myConn(mysql,{
     port: 3306,
     database:"usuarios"
 }))
-app.use(express.urlencoded({extended:false}))
+app.use(express.urlencoded({extended:true}))
 
 // importado de las rutas
-const rutasCustomer = require("./rutas/customer");
+const rutasCustomer = require("./rutas/usuarios");
 const { urlencoded } = require("express");
 
 
@@ -31,8 +32,7 @@ const { urlencoded } = require("express");
 app.use('/', rutasCustomer) // esta constante contiene las rutas
 
 
-//Archivos estaticos
-app.use(express.static(path.join(__dirname, "public")));
+
 
 // Inicializando el servidor
 app.listen(3000,()=>{
